@@ -1,0 +1,50 @@
+{% load static %}
+{% load auth_extras %}
+
+<style>
+    .hello-msg {
+        font-size: 14px;
+        color: #ffffff;
+        margin-right: 20px;
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a href="{% url 'pages:index' %}"><img src="{% static 'img/logo.png' %}" style="padding-right:2rem;"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            {% if not user.is_authenticated %}
+            <h1 style="padding-right: 5rem;color: steelblue;">GER'S GARAGE</h1>
+            {% endif %}
+            {% if request.user|has_group:"admin" %}
+            <li class="nav-item">
+                <a class="nav-item nav-link active" href="{% url 'bookings:dashboard' %}">Dashboard</a>
+            </li>
+            {% endif %}
+            {% if request.user|has_group:"customer" %}
+            <li class="nav-item">
+                <a class="nav-item nav-link active" href="{% url 'bookings:index' %}">Booking</a>
+            </li>
+            {% endif %}
+            <li class="nav-item">
+                <a class="nav-item nav-link" href="{% url 'pages:services' %}">Services</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-item nav-link" href="{% url 'pages:about' %}">About Us</a>
+            </li>
+            {% if request.user|has_group:"customer" %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'pages:settings' %}">Settings</a>
+            </li>
+            {% endif %}
+        </div>
+    </div>
+    {% if user.is_authenticated %}
+    <span class="hello-msg">Hello, {{request.user}}</span>
+    <span><a class="hello-msg" href="{% url 'pages:logout' %}">Logout</a></span>
+    {% endif %}
+</nav>

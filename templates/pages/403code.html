@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<style>
+    body,
+    html {
+        height: 100%;
+        margin: 0;
+    }
+
+    .bgimg {
+        /* background-image: url('.../static/img/403Page.gif'); */
+        height: 100%;
+        background-position: center;
+        background-size: cover;
+        position: relative;
+    }
+
+    /* Small Screens */
+    @media only screen and (max-width: 600px) {
+        .bgimg {
+            background-size: contain;
+        }
+    }
+</style>
+
+<body>
+    <div class="bgimg">
+        <img src="{% static '/img/403Page.gif' %}">
+    </div>
+
+</body>
+<!-- Script for redirect page -->
+<script>
+    function redirect() {
+        window.location.href = "{% url 'pages:login' %}";
+    }
+
+    setTimeout(redirect, 5000); //5000 is equivalent to 5 seconds
+</script>
+
+</html>
