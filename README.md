@@ -7,7 +7,7 @@
 - [General info](#general-info)
 - [Screenshots](#screenshots)
 - [Technologies](#technologies)
-- [Setup](#setup)
+- [Access](#access)
 - [Changelog](#changelog)
 - [Roadmap](#roadmap)
 - [Contact](#contact)
@@ -26,11 +26,11 @@
 ## Technologies
 
 - Python - version 3.9.1
-- Django - version 1.19
+- Django - version 3.1.5
 - Postgresql - version 12.5
 - Nodemailer - version 6.4
 
-## Setup
+## Access
 
 Access the app through the following link:
 
@@ -38,8 +38,9 @@ Access the app through the following link:
 
 ## Changelog
 
-- December 2020 Created project - _finished_
-- January 2021 Frontend - Loggin/Register - _finished_
+- December 2020 Set enviroment - _finished_
+- January 2021 Loggin/Register - _finished_
+- January 2021 Book a service - _finished_
 
 ## Roadmap
 
