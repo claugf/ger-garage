@@ -1,6 +1,7 @@
 # from gersgarage.pages.models import Customer, Staff
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.validators import RegexValidator
 from django.utils.translation import gettext as _
 
 import datetime
@@ -61,7 +62,8 @@ class Vehicle(models.Model):
         ('DIESEL', 'DIESEL'),
         ('GAS', 'GAS'),
     )
-    plate = models.CharField(max_length=9, primary_key=True)
+    plate = models.CharField(max_length=11, primary_key=True, validators=[
+                             RegexValidator('^[A-Z0-9]+(-[A-Z0-9]+)*$', 'Only numbers, uppercase letters and dashes allowed.')])
     color = models.CharField(max_length=10, choices=COLOR, null=True)
     year = models.PositiveSmallIntegerField(
         _('year'), validators=[MinValueValidator(1920), max_value_current_year], null=True)

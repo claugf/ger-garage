@@ -1,23 +1,84 @@
 {% extends 'base.html' %}
 
+<!-- Manage validation  through custom template tags -->
+{% load val_extras %}
+
 {% block content %}
 
 <div class="row mt-5">
-    <div class="card card-body text-center">
-        <h1>VEHICLE PAGE</h1>
+    <div class="card card-body">
+        <h1 class="text-center mb-3"><i class="fas fa-car"></i> REGISTER YOUR VEHICLE</h1>
         <hr>
 
-        <form action="" method="POST">
+        <!-- Messages -->
+        {% include 'partials/_messages.html' %}
+
+        <form method="POST" action="">
             {% csrf_token %}
-            {{form}}
-            <input type="submit" name="Submit">
+            <div class="container">
+                <div class="row">
+                    <!-- Begin 1st column -->
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="plate">Plate</label>
+                            <input type="text" id="plate" name="plate" value="" class="form-control"
+                                placeholder="Enter Plate" maxlength="11" />
+
+                        </div>
+                        <div class="form-group">
+                            <label for="make">Make</label>
+                            <select class="custom-select" id="make" name="make">
+                                <option selected="">Open this select menu</option>
+                                {% for make in makes %}
+                                <option value="{{make.id}}">{{make.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="vehicleModel">Model</label>
+                            <select class="custom-select" id="vehicleModel" name="vehicleModel">
+                                <option selected="">Open this select menu</option>
+                                {% for vmodel in vmodels %}
+                                <option value="{{vmodel.id}}">{{vmodel.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="color">Color</label>
+                            {{form.color}}
+                        </div>
+                    </div>
+                    <!-- Begin 2nd column -->
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="exampleSelect1">Year</label>
+                            <select class="custom-select" name="year" id="year">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="engine_type">Engine Type</label>
+                            {{form.engine_type}}
+                        </div>
+                        <div class="form-group">
+                            <label for="transmission">Transmission</label>
+                            <input type="number" name="transmission" value="" class="form-control"
+                                placeholder="Enter Transmission" min="0" max="10000" />
+                        </div>
+                        <div class="form-group">
+                            <label for="fuel">Fuel</label>
+                            {{form.fuel}}
+                        </div>
+                        <div style="display: none;">
+                            {{form.customer}}
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Save</button>
+                <a class="btn btn-secondary btn-block" href="{% url 'bookings:booking' %}">Cancel</a>
+            </div>
         </form>
     </div>
-    <!-- <div class="col-md-6 m-auto">
-        <div class="card card-body text-center">
-            
-        </div>
-    </div> -->
 </div>
 
 {% endblock %}

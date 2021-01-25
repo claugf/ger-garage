@@ -29,7 +29,8 @@ def register(request):
             group = Group.objects.get(name="customer")
             user.groups.add(group)
 
-            messages.success(request, 'Account was created for ' + username)
+            messages.success(
+                request, 'You have been registered sucessfully, please Log In!')
             return redirect('pages:login')
 
     context = {'form': form}
@@ -63,6 +64,7 @@ def loginPage(request):
 def logoutUser(request):
     # LOGOUT USER
     logout(request)
+    messages.info(request, 'You are logged out!')
     return redirect('pages:login')
 
 

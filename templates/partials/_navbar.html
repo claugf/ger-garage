@@ -1,6 +1,6 @@
 <!-- Loading static files (images) -->
 {% load static %}
-<!-- Manage authentication groups -->
+<!-- Manage authentication groups through custom template tags -->
 {% load auth_extras %}
 
 <style>
@@ -32,7 +32,7 @@
                 <a class="nav-item nav-link active" href="{% url 'bookings:index' %}">Booking</a>
             </li>
             <li class="nav-item">
-                <a class="nav-item nav-link active" href="{% url 'bookings:vehicle' user.id %}">Register Vehicle</a>
+                <a class="nav-item nav-link active" href="{% url 'bookings:vehicle' %}">Register Vehicle</a>
             </li>
             {% endif %}
             <li class="nav-item">

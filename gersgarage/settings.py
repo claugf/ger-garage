@@ -69,6 +69,7 @@ TEMPLATES = [
 
             'libraries':{
                 'auth_extras': 'pages.templatetags.auth_extras',
+                'val_extras': 'bookings.templatetags.val_extras',
 
             }
         },
