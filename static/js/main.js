@@ -1,4 +1,6 @@
-console.log("Hello World!!");
+/////////////////////////////////////////////////////////////
+//                     VEHICLE TEMPLATE                    //
+/////////////////////////////////////////////////////////////
 
 // Function to allow only numbers, uppercase and dashes in vehicle template - plate field
 $("#plate")
@@ -17,11 +19,6 @@ $("#plate")
       $(this).val($(this).val().replace(forbiddenChars, ""));
     }
   });
-
-//  Assigning class to all choices fields in vehicle template
-$("#id_color").addClass("form-control");
-$("#id_engine_type").addClass("form-control");
-$("#id_fuel").addClass("form-control");
 
 //  Filling year dropdownbox from 1920 to currentyear
 var nowY = new Date().getFullYear(),

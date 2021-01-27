@@ -3,17 +3,55 @@
 {% block content %}
 
 <div class="row mt-5">
-    <div class="card card-body text-center">
-        <h1><i class="fas fa-cogs fa-3x"></i></h1>
-        <p>Select a date and booking with us!</p>
-    </div>
-    <div class="col-md-6 m-auto">
-        <div class="card card-body text-center">
-            <p></p>
-            <a href="{% url 'bookings:booking' %}" class="btn btn-primary btn-block mb-2">Booking a Service</a>
-            <a href="{% url 'bookings:booking' %}" class="btn btn-secondary btn-block">Last Bookings</a>
+    <!-- <div class="col-md-6 m-auto"> -->
+    <!-- Messages -->
+    {% include 'partials/_messages.html' %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card card-body text-center">
+                    <h1><i class="fas fa-cogs fa-3x"></i></h1>
+                    <p>Select a date and booking with us!</p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card card-body text-center">
+                    <p></p>
+                    <a href="{% url 'bookings:booking' %}" class="btn btn-primary btn-block mb-2">Booking a Service</a>
+                    <a href="{% url 'bookings:booking' %}" class="btn btn-secondary btn-block">Last Bookings</a>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top:2rem;">
+            <div class="col">
+                <div class="card card-body text-center">
+                    <h4>BOOKINGS IN PROGRESS</h4>
+                    <hr>
+
+                    <table class="table table-hover table-primary">
+                        <thead>
+                            <tr>
+                                <th scope="col">Date</th>
+                                <th scope="col">Plate</th>
+                                <th scope="col">Booking Type</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for booking in bookings %}
+                            <tr class="table-secondary">
+                                <td>{{booking.0|date:'d/m/Y H:i'}}</td>
+                                <td>{{booking.1}}</td>
+                                <td>{{booking.2}}</td>
+                                <td>{{booking.3}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
-{% endblock %}
+    {% endblock %}

@@ -3,25 +3,65 @@
 {% block content %}
 
 <div class="row mt-5">
-    <div class="card card-body text-center">
-        <h1>BOOKING PAGE</h1>
-        <hr>
+    <div class="col-md-6 m-auto">
+        <div class="card card-body">
+            <h1 class="text-center mb-3"><i class="fas fa-book"></i> BOOK A SERVICE</h1>
+            <hr>
 
-        <!-- Messages -->
-        {% include 'partials/_messages.html' %}
-    </div>
-    <!-- <div class="col-md-6 m-auto">
-        <div class="card card-body text-center">
-            <p>Create an account or login</p>
-            <a href="/users/register" class="btn btn-primary btn-block mb-2">Register</a>
-            <a href="/users/login" class="btn btn-secondary btn-block">Login</a>
+            <!-- Messages -->
+            {% include 'partials/_messages.html' %}
+
+            <form method="POST" action="">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="plate">Plate</label>
+                    <select class="form-control" id="plate" name="plate">
+                        {% for plate in plates %}
+                        <option value="{{plate.plate}}">{{plate.plate}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="name">Booking Type</label>
+                    {{form.booking_type}}
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <label for="date">Date / Time</label>
+                        <div class="row">
+                            {{form.date}}
+                            <!-- <label>Date</label> -->
+
+                            <select class="custom-select" id="time" name="time">
+                                <option selected="">Open this select menu</option>
+                                <option value="time">09:00am</option>
+                                <option value="time">11:00am</option>
+                                <option value="time">01:00pm</option>
+                                <option value="time">03:00pm</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="comments">Comments</label>
+                    <textarea class="form-control" id="comments" name="comments" rows="3" spellcheck="true"
+                        placeholder="Enter your comments here" maxlength="500"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">
+                    Book
+                </button>
+            </form>
         </div>
-    </div> -->
-    <!-- Message Section -->
-
-
-
-
+    </div>
 </div>
+
+<script>
+    // Add classes to plate and booking type fields
+    window.onload = function () {
+        document.getElementById('id_booking_type').className = 'form-control';
+    };
+</script>
 
 {% endblock %}

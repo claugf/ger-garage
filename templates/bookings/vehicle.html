@@ -1,8 +1,5 @@
 {% extends 'base.html' %}
 
-<!-- Manage validation  through custom template tags -->
-{% load val_extras %}
-
 {% block content %}
 
 <div class="row mt-5">
@@ -80,5 +77,14 @@
         </form>
     </div>
 </div>
+
+<script>
+    //  Assigning class to all choices fields 
+    window.onload = function () {
+        document.getElementById('id_color').className = 'form-control';
+        document.getElementById('id_engine_type').className = 'form-control';
+        document.getElementById('id_fuel').className = 'form-control';
+    };
+</script>
 
 {% endblock %}
