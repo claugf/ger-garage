@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 
+<!-- Loading static files (images) -->
+{% load static %}
+
 {% block content %}
 <div class="row mt-5">
     <div class="card card-body">
@@ -7,14 +10,16 @@
         <hr>
         <div class="container">
             <div class="row">
-                <div class="col">
+                <div class="col mt-5">
                     <h2>Find Us...</h2>
                     <p><i class="fas fa-phone"></i> +(353) - 830032381</p>
                     <p><i class="fas fa-map-marker-alt"></i> 10 Lorcan Drive, Dublin 9</p>
                     <p><i class="fas fa-calendar-alt"></i> Mon-Sat | 9:00am-6:00pm</p>
                 </div>
-                <div class="col">
-                    <h1>IMAGE</h1>
+                <div class="col" style="padding-right: 2rem;">
+                    <div class="text-center">
+                        <img src="{% static 'img/GersTeam.jpg' %}" class="rounded" style="width: 500px;">
+                    </div>
                 </div>
             </div>
             <br>

@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 
+<!-- Loading static files (images) -->
+{% load static %}
+
 {% block content %}
 <div class="row mt-5">
     <div class="card card-body">
@@ -7,12 +10,15 @@
         <hr>
         <div class="container">
             <div class="row">
-                <div class="col">
+                <div class="col mt-5">
                     <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil corrupti, accusamus velit non
                         corporis placeat deleniti earum error id officia. Enim ipsam ad placeat sed excepturi! Nisi iste
                         ratione et.</p>
                 </div>
                 <div class="col">
+                    <div class="text-center">
+                        <img src="{% static 'img/Serv1.jpg' %}" class="rounded" style="width: 300px;">
+                    </div>
                     <p></p>
                     <a href="{% url 'bookings:booking' %}" class="btn btn-primary btn-block mb-2">Booking an Annual
                         Service</a>
@@ -21,11 +27,14 @@
             <hr>
             <div class="row">
                 <div class="col">
+                    <div class="text-center">
+                        <img src="{% static 'img/Serv2.jpg' %}" class="rounded" style="width: 300px;">
+                    </div>
                     <p></p>
                     <a href="{% url 'bookings:booking' %}" class="btn btn-primary btn-block mb-2">Booking a Mayor
                         Service</a>
                 </div>
-                <div class="col">
+                <div class="col mt-5">
                     <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil corrupti, accusamus velit non
                         corporis placeat deleniti earum error id officia. Enim ipsam ad placeat sed excepturi! Nisi iste
                         ratione et.</p>
@@ -33,12 +42,15 @@
             </div>
             <hr>
             <div class="row">
-                <div class="col">
+                <div class="col mt-5">
                     <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil corrupti, accusamus velit non
                         corporis placeat deleniti earum error id officia. Enim ipsam ad placeat sed excepturi! Nisi iste
                         ratione et.</p>
                 </div>
                 <div class="col">
+                    <div class="text-center">
+                        <img src="{% static 'img/Serv3.jpeg' %}" class="rounded" style="width: 300px;">
+                    </div>
                     <p></p>
                     <a href="{% url 'bookings:booking' %}" class="btn btn-primary btn-block mb-2">Booking a Repair/Fault
                         Service</a>
@@ -47,11 +59,14 @@
             <hr>
             <div class="row">
                 <div class="col">
+                    <div class="text-center">
+                        <img src="{% static 'img/Serv4.jpg' %}" class="rounded" style="width: 300px;">
+                    </div>
                     <p></p>
                     <a href="{% url 'bookings:booking' %}" class="btn btn-primary btn-block mb-2">Booking a Mayor
                         Repair</a>
                 </div>
-                <div class="col">
+                <div class="col mt-5">
                     <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil corrupti, accusamus velit non
                         corporis placeat deleniti earum error id officia. Enim ipsam ad placeat sed excepturi! Nisi iste
                         ratione et.</p>

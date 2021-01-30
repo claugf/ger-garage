@@ -138,12 +138,12 @@ class BookingStatus(models.Model):
     STATUS = (
         ('B', 'Booked'),
         ('S', 'In Service'),
-        ('F', 'Fixed/Completed'),
-        ('C', 'Collected'),
+        ('CM', 'Completed'),
+        ('CL', 'Collected'),
         ('S', 'Unrepairable'),
     )
     status = models.CharField(
-        max_length=1, choices=STATUS, default='B', null=False)
+        max_length=2, choices=STATUS, default='B', null=False)
     date = models.DateTimeField(auto_now_add=True, null=False)
     booking = models.ForeignKey(Booking, on_delete=models.CASCADE, null=False)
 
