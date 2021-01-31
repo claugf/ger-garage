@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Required meta Tags -->
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- Loading favicon -->
+    <link rel="icon" href="{% static 'img/favicon.ico' %}">
+    <!-- Library for icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <!-- Bootstrap Library styles -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/lux/bootstrap.min.css" />
+
+    <!-- Date Time Picker CSS -->
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
+    <link rel='stylesheet' href="{% static 'css/jquery-ui-timepicker-addon.css' %}" />
+
+    <!-- Custom JS -->
+    <script src="{% static 'js/main.js' %}" defer></script>
+
+    <title>Ger's Garage </title>
+</head>
+
+<body>
+
+
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <!-- Jquery -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <!-- Semantic UI -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+    <!-- Boostrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+
+    <!-- Script for remove messages automatically -->
+    <script>
+        setTimeout(function () {
+            if ($('#msg').length > 0) {
+                $('#msg').remove();
+            }
+        }, 5000)
+    </script>
+
+    <!-- Date Time Picker JS -->
+    <script src="{% static 'js/jquery-ui.js' %}"></script>
+    <script src="{% static 'js/jquery-ui-timepicker-addon.js' %}"></script>
+    <script>
+        $(function () {
+
+            $("#id_date").datetimepicker({
+                dateFormat: 'yy-mm-dd', firstDay: 1, minDate: 0, numberOfMonths: 3, step: 30, controlType: 'select', beforeShowDay: function (date) {
+                    var day = date.getDay()
+                    if (day == 0) {
+                        return [false];
+                    }
+                    else {
+                        return [true];
+                    }
+                }, enabledHours: [9, 11, 13, 15], hoursDisabled: [0, 1, 2, 3, 4, 5, 6, 7, 8, 18, 19, 20, 21, 22, 23]
+            }).attr("autocomplete", "off");
+        });
+    </script>
+    <!-- Date Time Picker JS -->
+</body>
+
+</html>
