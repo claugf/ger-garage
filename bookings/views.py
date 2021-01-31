@@ -13,19 +13,21 @@ from django.db import connection
 
 def q_bookings_customer(customer):
     with connection.cursor() as cursor:
-        print(customer)
-        # cursor.execute("UPDATE bar SET foo = 1 WHERE baz = %s", [self.baz])
+        # Raw query to the database to get the last status of the bookings per customer
         cursor.execute('SELECT B.date, B.plate_id, BT.name , BS.status ' +
                        'FROM bookings_booking B ' +
                        'INNER JOIN bookings_vehicle V ON V.plate = B.plate_id ' +
                        'INNER JOIN pages_customer C ON C.id = V.customer_id ' +
                        'INNER JOIN bookings_bookingtype BT ON BT.id = B.booking_type_id ' +
                        'INNER JOIN ( ' +
-                       "SELECT BS.booking_id, BS.date, (CASE WHEN BS.status = 'B' THEN 'BOOKED' ELSE 'IN SERVICE' END) AS status " +
+                       "SELECT BS1.booking_id, BS1.date, (CASE WHEN BS1.status = 'B' THEN 'BOOKED' ELSE 'IN SERVICE' END) AS status " +
+                       "FROM bookings_bookingstatus BS1 " +
+                       "INNER JOIN ( " +
+                       "SELECT BS.booking_id, MAX(BS.date)date " +
                        "FROM bookings_bookingstatus BS " +
                        "WHERE BS.status IN ('B', 'S') " +
-                       "ORDER BY BS.date DESC " +
-                       "LIMIT 1 " +
+                       "GROUP BY BS.booking_id "
+                       ") BS2 ON (BS1.booking_id=BS2.booking_id AND BS1.date = BS2.date) " +
                        ") BS ON BS.booking_id = B.id " +
                        'WHERE V.customer_id = %s', [customer])
         q = cursor.fetchall()
@@ -61,7 +63,7 @@ def booking(request):
     plates = Vehicle.objects.filter(customer_id=customer)
 
     form = BookingForm()
-    print(plates.values())
+
     # Check if there is any vehicle registered for the customer
     # If not, it redirects the user to the Vehicle Form
     if not plates:
