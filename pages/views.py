@@ -12,7 +12,7 @@ from .forms import CreateUserForm
 from .decorators import authenticated_user, allowed_users
 
 
-@authenticated_user
+# @authenticated_user
 def index(request):
     # GERSGARAGE INDEX
     return render(request, 'pages/index.html')
