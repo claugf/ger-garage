@@ -27,7 +27,7 @@ SECRET_KEY = 's1ngo49zd526fm30hr)ao^tl&#lkh03mo+va^72w=iv+ht^c^&'
 # DEBUG = True
 DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['gersgarage-2020085.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
