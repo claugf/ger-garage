@@ -54,7 +54,7 @@ def booking(request):
     plates = Vehicle.objects.filter(customer_id=customer)
 
     form = BookingForm()
-
+    print(plates.values())
     # Check if there is any vehicle registered for the customer
     # If not, it redirects the user to the Vehicle Form
     if not plates:

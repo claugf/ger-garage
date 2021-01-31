@@ -14,20 +14,24 @@
 
 ## General info
 
-> Through this application, the user can register a project and the bugs or issues founded in such project. Within every issue founded, the user can add follow up comments about the issue. It is also possible to add more users, all password's users are hashed for security reasons.
+> This web application provides a clear, clean and reliable booking process, where the customer can get the earlier available date for their mechanical services, manage and check their bookings through their private accounts. On the other hand, this web application will help to organize the bookings efficiently, saving Ger’s time.
 
 ## Screenshots
 
 ![Welcome Page](./static/img/readme/Welcome.png)
 ![Login](./static/img/readme/Login.png)
-![Register](./static/img/readme/Register.png)
+![Register Customer](./static/img/readme/RegisterCus.png)
+![Register Vehicle](./static/img/readme/RegisterVeh.png)
+![Booking](./static/img/readme/Booking.png)
 ![Dashboard](./static/img/readme/Dashboard.png)
 
 ## Technologies
 
 - Python - version 3.9.1
 - Django - version 3.1.5
-- Postgresql - version 12.5
+- Postgresql - version 13
+- PgAdmin - version 4
+- Psycopg - version 2.8.6
 - Nodemailer - version 6.4
 
 ## Access
@@ -39,12 +43,15 @@ Access the app through the following link:
 ## Changelog
 
 - December 2020 Set enviroment - _finished_
-- January 2021 Loggin/Register - _finished_
+- January 2021 Register/Loggin - _finished_
+- January 2021 Register Vehicle - _finished_
 - January 2021 Book a service - _finished_
 
 ## Roadmap
 
-- February 2021 Docker-ise application
+- February 2021 Dashboard Admin
+- February 2021 Setting Page
+- February 2021 Sent email confirmation
 - March 2021 Unit Testing
 
 ## Contact
