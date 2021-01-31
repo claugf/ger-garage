@@ -38,12 +38,19 @@ def q_bookings_customer(customer):
 def index(request):
     # Getting customer
     customer = Customer.objects.get(user_id=request.user)
+
     # Getting bookings by customer with status as Booked or In Service
     q = q_bookings_customer(customer.id)
 
     context = {'bookings': q}
 
     return render(request, 'bookings/index.html', context)
+
+
+@ login_required(login_url='pages:login')
+@ allowed_users(allowed_roles=['customer'])
+def lastbookings(request):
+    return render(request, 'bookings/lastbookings.html')
 
 
 @login_required(login_url='pages:login')

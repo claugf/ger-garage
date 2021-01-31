@@ -23,7 +23,8 @@
 ![Register Customer](./static/img/readme/RegisterCus.png)
 ![Register Vehicle](./static/img/readme/RegisterVeh.png)
 ![Booking](./static/img/readme/Booking.png)
-![Dashboard](./static/img/readme/Dashboard.png)
+![Booking Dashboard](./static/img/readme/BookingDashboard.png)
+![Admin Dashboard](./static/img/readme/AdminDashboard.png)
 
 ## Technologies
 

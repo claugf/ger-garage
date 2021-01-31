@@ -6,6 +6,7 @@ app_name = 'bookings'
 
 urlpatterns = [
     path('', views.index, name="index"),
+    path('lastbookings/', views.lastbookings, name="lastbookings"),
     path('booking/', views.booking, name="booking"),
     path('vehicle/', views.vehicle, name="vehicle"),
     path('vehicle/models-json/<str:pk>/',
