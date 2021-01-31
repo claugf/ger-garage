@@ -35,8 +35,34 @@ def q_bookings_customer(customer):
     return q
 
 
-@login_required(login_url='pages:login')
-@allowed_users(allowed_roles=['customer'])
+def q_bookings_admin():
+    with connection.cursor() as cursor:
+        # Raw query to the database to get the following bookings
+        cursor.execute('SELECT B.id, B.date, B.plate_id, M."name", BT.name , BS.status  ' +
+                       'FROM bookings_booking B ' +
+                       'INNER JOIN bookings_vehicle V ON V.plate = B.plate_id ' +
+                       'INNER JOIN bookings_vehiclemodel M ON M.id = V."vehicleModel_id" ' +
+                       'INNER JOIN pages_customer C ON C.id = V.customer_id ' +
+                       'INNER JOIN bookings_bookingtype BT ON BT.id = B.booking_type_id ' +
+                       'INNER JOIN ( ' +
+                       "SELECT BS1.booking_id, BS1.date, (CASE WHEN BS1.status = 'B' THEN 'BOOKED' ELSE 'IN SERVICE' END) AS status " +
+                       "FROM bookings_bookingstatus BS1 " +
+                       "INNER JOIN ( " +
+                       "SELECT BS.booking_id, MAX(BS.date)date " +
+                       "FROM bookings_bookingstatus BS " +
+                       "WHERE BS.status IN ('B', 'S') " +
+                       "GROUP BY BS.booking_id "
+                       ") BS2 ON (BS1.booking_id=BS2.booking_id AND BS1.date = BS2.date) " +
+                       ") BS ON BS.booking_id = B.id " +
+                       'WHERE B.date >= NOW() ' +
+                       'ORDER BY B.date')
+        q = cursor.fetchall()
+
+    return q
+
+
+@ login_required(login_url='pages:login')
+@ allowed_users(allowed_roles=['customer'])
 def index(request):
     # Getting customer
     customer = Customer.objects.get(user_id=request.user)
@@ -55,8 +81,8 @@ def lastbookings(request):
     return render(request, 'bookings/lastbookings.html')
 
 
-@login_required(login_url='pages:login')
-@allowed_users(allowed_roles=['customer'])
+@ login_required(login_url='pages:login')
+@ allowed_users(allowed_roles=['customer'])
 def booking(request):
 
     customer = Customer.objects.get(user_id=request.user)
@@ -74,9 +100,24 @@ def booking(request):
         if request.method == "POST":
             form = BookingForm(request.POST)
             if form.is_valid():
-                form.save()
-                messages.success(request, 'Booking registered successfully!')
-                return redirect('bookings:index')
+                # Obtaining selected date
+                dt = form.cleaned_data['date']
+                # Query to count how many bookings per day
+                bookingsDay = Booking.objects.filter(date__date=dt).count()
+                # Limit of bookings per day, it must be 15, set 3 for demo
+                limit = 3
+
+                # If bookings HAVE NOT reached the limit, then save the booking
+                if bookingsDay < limit:
+                    form.save()
+                    messages.success(
+                        request, 'Booking registered successfully!')
+                    return redirect('bookings:index')
+                else:
+                    # If bookings HAVE reached the limit, then warn the user
+                    print("No valid")
+                    messages.warning(
+                        request, "The limit number of bookings has been reached for this date. Please select other date!")
 
     context = {'form': form, 'plates': plates}
     return render(request, 'bookings/booking.html', context)
@@ -115,4 +156,23 @@ def get_json_model_data(request, *args, **kwargs):
 @ login_required(login_url='pages:login')
 @ allowed_users(allowed_roles=['admin'])
 def dashboard(request):
-    return render(request, 'bookings/dashboard.html')
+    # Getting following bookings with status as Booked or In Service
+    q = q_bookings_admin()
+
+    context = {'bookings': q}
+    return render(request, 'bookings/dashboard.html', context)
+
+
+def update_status_I(request, pk):
+    booking = Booking.objects.get(id=pk)
+    # Adding a new status as "In-service"
+    BookingStatus.objects.create(
+        status='S',
+        booking=booking,
+    )
+
+    # Getting following bookings with status as Booked or In Service
+    q = q_bookings_admin()
+
+    context = {'bookings': q}
+    return render(request, 'bookings/dashboard.html', context)

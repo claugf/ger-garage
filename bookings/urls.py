@@ -11,5 +11,6 @@ urlpatterns = [
     path('vehicle/', views.vehicle, name="vehicle"),
     path('vehicle/models-json/<str:pk>/',
          views.get_json_model_data, name="models-json"),
-    path('dashboard/', views.dashboard, name="dashboard")
+    path('dashboard/', views.dashboard, name="dashboard"),
+    path('update_status_I/<str:pk>', views.update_status_I, name="update_status_I"),
 ]
