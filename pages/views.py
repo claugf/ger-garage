@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 
 from django.contrib import messages
+from django.core import exceptions
+from django.http.response import HttpResponseForbidden
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
@@ -68,9 +70,24 @@ def logoutUser(request):
     return redirect('pages:login')
 
 
-def unauthorizedpage(request):
+def unauthorizedpage(request, exception):
     # PAGE 403 CODE
-    return render(request, 'pages/403code.html')
+    return render(request, 'pages/403_csrf.html')
+
+
+def notfoundpage(request, exception):
+    # PAGE 404 CODE
+    return render(request, 'pages/404code.html')
+
+
+def errorpage(request):
+    # PAGE 500 CODE
+    return render(request, 'pages/500code.html')
+
+
+def errordemopage(request):
+    # PAGE TO TEST 500 CODE
+    return render('pages:doesnotexist')
 
 
 def services(request):

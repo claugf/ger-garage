@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect
+from django.core import exceptions
 
 
 def authenticated_user(view_func):
@@ -29,7 +30,7 @@ def allowed_users(allowed_roles=[]):
             if group in allowed_roles:
                 return view_func(request, *args, **kwargs)
             else:
-                return redirect('pages:403code')
+                raise exceptions.PermissionDenied
 
         return wrapper_func
 
